@@ -262,8 +262,99 @@ app.get('/report/excel', async (req, res) => {
     console.error(err.message);
     res.send('Error al generar el reporte en Excel');
   }
-});                                                                                                                                                            
+});     
+
+// Ruta para generar reporte de películas en PDF
+app.get('/report/movies/pdf', async (req, res) => {
+  try {
+    const response = await axios.get(`${TMDB_BASE_URL}/movie/popular`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: 'es-ES'
+      }
+    });
+
+    const movies = response.data.results;
+
+    if (movies.length === 0) {
+      throw new Error('No se encontraron películas para generar el reporte.');
+    }
+
+    const doc = new PDFDocument();
+    let filename = 'reporte_peliculas_populares.pdf';
+    res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
+    res.setHeader('Content-type', 'application/pdf');
+
+    doc.pipe(res);
+    doc.fontSize(25).text('Reporte de Películas Populares', { align: 'center' });
+    doc.moveDown();
+
+    movies.forEach(movie => {
+      doc.fontSize(12).text(`Título: ${movie.title}`);
+      doc.fontSize(12).text(`Descripción: ${movie.overview}`);
+      doc.fontSize(12).text(`Fecha de lanzamiento: ${movie.release_date}`);
+      doc.fontSize(12).text(`Puntuación: ${movie.vote_average}`);
+      doc.fontSize(12).text('---------------------------------');
+      doc.moveDown();
+    });
+
+    doc.end();
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Error al generar el reporte en PDF: ' + err.message);
+  }
+});
+
+// Ruta para generar reporte de películas en Excel
+app.get('/report/movies/excel', async (req, res) => {
+  try {
+    const response = await axios.get(`${TMDB_BASE_URL}/movie/popular`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: 'es-ES'
+      }
+    });
+
+    const movies = response.data.results;
+
+    if (movies.length === 0) {
+      throw new Error('No se encontraron películas para generar el reporte.');
+    }
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Películas Populares');
+
+    worksheet.columns = [
+      { header: 'Título', key: 'title', width: 30 },
+      { header: 'Descripción', key: 'overview', width: 50 },
+      { header: 'Fecha de lanzamiento', key: 'release_date', width: 15 },
+      { header: 'Puntuación', key: 'vote_average', width: 10 }
+    ];
+
+    movies.forEach(movie => {
+      worksheet.addRow({
+        title: movie.title,
+        overview: movie.overview,
+        release_date: movie.release_date,
+        vote_average: movie.vote_average
+      });
+    });
+
+    let filename = 'reporte_peliculas_populares.xlsx';
+    res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"');
+    res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (err) {
+    console.error(err.message);
+    res.send('Error al generar el reporte en Excel: ' + err.message);
+  }
+});
+                                                                      
+
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
+         

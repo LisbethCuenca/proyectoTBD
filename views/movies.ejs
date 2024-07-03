@@ -1,3 +1,302 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <style>
+ 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(40, 29, 65);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .movie-carousel-container {
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .movie-carousel {
+      display: flex;
+      overflow: hidden;
+     
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .movie {
+      margin-right: 10px;
+      
+      flex: 0 0 calc(25% - 10px);
+     
+      position: relative;
+      max-width: 200px;
+      
+      cursor: pointer;
+      
+    }
+
+    .movie img {
+      width: 100%;
+      
+      max-width: 200px;
+     
+      height: auto;
+      
+    }
+
+    .movie-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .movie:hover .movie-info {
+      opacity: 1;
+    }
+
+    .movie-info h3 {
+      margin-top: 0;
+    }
+
+    .movie-info p {
+      margin-bottom: 5px;
+    }
+
+  
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1;
+    }
+
+    .carousel-controls button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .carousel-controls button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+
+    .cabeza {
+      
+      height: 50px;
+      margin-bottom: 20px;
+      display: flex;
+    }
+
+    .cabeza {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+}
+
+.title a{
+    color: white;
+    margin: 0;
+    
+}
+
+.button2 {
+    text-decoration: none;
+    color: white; 
+    text-decoration: none; 
+    
+}
+   
+
+    .title {
+      font-family: 'Impact', sans-serif;
+     
+      color: #8b0000;
+      
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+     
+      letter-spacing: 2px;
+      
+      padding-bottom: 20px;
+      
+      animation: swing 2s infinite alternate;
+      
+    }
+
+    @keyframes swing {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(30px);
+       
+      }
+    }
+
+
+    head {}
+
+  </style>
+  <div class="cabeza">
+    <h1 class="title">PATOFLIX</h1>
+    <a href="/dashboard" class="button2">Panel</a>
+    <a href="/" class="button2">Cerrar Sesión</a> 
+  </div>
+</head>
+
+<body>
+
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar películas...">
+    <button onclick="searchMovies()">Buscar</button>
+  </div>
+
+
+  <div id="movies-container" style="display: flex;">
+    
+  </div>
+
+  
+  <% Object.keys(moviesByGenre).forEach(genre=> { %>
+    <h2>
+      <%= genre %>
+    </h2>
+    <div class="movie-carousel-container">
+      <div class="carousel-controls">
+        <button class="carousel-prev" onclick="scrollCarousel('prev')">❮</button>
+        <button class="carousel-next" onclick="scrollCarousel('next')">❯</button>
+      </div>
+      <div class="movie-carousel">
+        <% moviesByGenre[genre].forEach(movie=> { %>
+          <div class="movie"
+            onclick="showMovieDetails('<%= movie.title %>', '<%= movie.overview %>', '<%= movie.genres.join(', ') %>')">
+            <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="<%= movie.title %>">
+            <div class="movie-info">
+              <h3>
+                <%= movie.title %>
+              </h3>
+              <p>
+                <%= movie.overview %>
+              </p>
+              <p>Género: <%= movie.genres.join(', ') %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  <% }); %>
+
+  <div id="movie-details">
+  </div>
+
+  <script>
+    async function searchMovies() {
+            const query = document.getElementById('search-input').value.trim();
+            if (query) {
+                try {
+                    const response = await fetch(`/search-movies?query=${query}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    displayMovies(data.results);
+                } catch (error) {
+                    console.error('Error fetching movies:', error);
+                }
+            } else {
+                console.error('Search query is empty');
+            }
+        }
+
+        function displayMovies(movies) {
+            const container = document.getElementById('movies-container');
+            container.innerHTML = ''; 
+            movies.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.className = 'movie';
+                movieDiv.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                    <h2>${movie.title}</h2>
+                    <p>${movie.overview}</p>
+                    <p>Género: ${movie.genre_ids.join(', ')}</p>
+                `;
+                container.appendChild(movieDiv);
+            });                 
+        }                               
+
+    function scrollCarousel(direction) {
+      const carousel = document.querySelector('.movie-carousel');
+      const scrollAmount = 300; 
+
+      if (direction === 'prev') {
+        carousel.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      } else if (direction === 'next') {
+        carousel.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    function showMovieDetails(title, overview, genres) {
+      const detailsContainer = document.getElementById('movie-details');
+      detailsContainer.innerHTML = `
+                  <h2>${title}</h2>
+                  <p>${overview}</p>
+                  <p>Género: ${genres}</p>
+                  `;
+    }
+  </script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,33 +424,12 @@
     }
 
     .cabeza {
-      
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       height: 50px;
       margin-bottom: 20px;
-      display: flex;
     }
-
-    .cabeza {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    
-}
-
-.title a{
-    color: white;
-    margin: 0;
-    
-}
-
-.button2 {
-    text-decoration: none; /* Elimina la subrayado del link */
-    color: white; /* Hace el texto blanco */
-    text-decoration: none; 
-    
-}
-   
 
     .title {
       font-family: 'Impact', sans-serif;
@@ -179,14 +457,39 @@
       }
     }
 
+    .button2 {
+      text-decoration: none;
+      /* Elimina la subrayado del link */
+      color: white;
+      /* Hace el texto blanco */
+      text-decoration: none;
+    }
 
-    head {}
+    /* Estilos para los botones de descarga de reportes */
+    .report-buttons {
+      margin-top: 20px;
+    }
+
+    .report-buttons a {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 10px;
+      background-color: #444;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .report-buttons a:hover {
+      background-color: #666;
+    }
 
   </style>
   <div class="cabeza">
     <h1 class="title">PATOFLIX</h1>
     <a href="/dashboard" class="button2">Panel</a>
-    <a href="/" class="button2">Cerrar Sesión</a> 
+    <a href="/" class="button2">Cerrar Sesión</a>
   </div>
 </head>
 
@@ -195,6 +498,12 @@
   <div class="search-container">
     <input type="text" id="search-input" placeholder="Buscar películas...">
     <button onclick="searchMovies()">Buscar</button>
+  </div>
+
+  <!-- Botones para descargar reportes -->
+  <div class="report-buttons">
+    <a href="/report/movies/pdf" target="_blank">Descargar reporte de películas en PDF</a>
+    <a href="/report/movies/excel" target="_blank">Descargar reporte de películas en Excel</a>
   </div>
 
   <!-- Contenedor para mostrar películas -->
@@ -235,44 +544,46 @@
   <div id="movie-details">
   </div>
 
+  
+
   <script>
     async function searchMovies() {
-            const query = document.getElementById('search-input').value.trim();
-            if (query) {
-                try {
-                    const response = await fetch(`/search-movies?query=${query}`);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    displayMovies(data.results);
-                } catch (error) {
-                    console.error('Error fetching movies:', error);
-                }
-            } else {
-                console.error('Search query is empty');
-            }
+      const query = document.getElementById('search-input').value.trim();
+      if (query) {
+        try {
+          const response = await fetch(`/search-movies?query=${query}`);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const data = await response.json();
+          displayMovies(data.results);
+        } catch (error) {
+          console.error('Error fetching movies:', error);
         }
+      } else {
+        console.error('Search query is empty');
+      }
+    }
 
-        function displayMovies(movies) {
-            const container = document.getElementById('movies-container');
-            container.innerHTML = ''; // Clear previous results
-            movies.forEach(movie => {
-                const movieDiv = document.createElement('div');
-                movieDiv.className = 'movie';
-                movieDiv.innerHTML = `
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-                    <h2>${movie.title}</h2>
-                    <p>${movie.overview}</p>
-                    <p>Género: ${movie.genre_ids.join(', ')}</p>
-                `;
-                container.appendChild(movieDiv);
-            });                 
-        }                               
+    function displayMovies(movies) {
+      const container = document.getElementById('movies-container');
+      container.innerHTML = ''; // Clear previous results
+      movies.forEach(movie => {
+        const movieDiv = document.createElement('div');
+        movieDiv.className = 'movie';
+        movieDiv.innerHTML = `
+          <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+          <h2>${movie.title}</h2>
+          <p>${movie.overview}</p>
+          <p>Género: ${movie.genre_ids.join(', ')}</p>
+        `;
+        container.appendChild(movieDiv);
+      });
+    }
 
     function scrollCarousel(direction) {
       const carousel = document.querySelector('.movie-carousel');
-      const scrollAmount = 300; 
+      const scrollAmount = 300;
 
       if (direction === 'prev') {
         carousel.scrollBy({
@@ -290,11 +601,12 @@
     function showMovieDetails(title, overview, genres) {
       const detailsContainer = document.getElementById('movie-details');
       detailsContainer.innerHTML = `
-                  <h2>${title}</h2>
-                  <p>${overview}</p>
-                  <p>Género: ${genres}</p>
-                  `;
+        <h2>${title}</h2>
+        <p>${overview}</p>
+        <p>Género: ${genres}</p>
+      `;
     }
   </script>
 </body>
+
 </html>
