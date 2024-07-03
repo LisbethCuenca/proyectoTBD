@@ -1,0 +1,1128 @@
+login.ejs:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    /* Estilos CSS proporcionados */
+    .body{
+      background-color: rgb(40, 29, 65);
+        
+    }
+    .form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0.4em 2em; /* Padding simplificado */
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  height: 400px;
+  width: 300px;
+}
+
+      
+
+
+    .card {
+      background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+      border-radius: 22px;
+      transition: all 0.3s;
+    }
+
+    .card2 {
+      border-radius: 0;
+      transition: all 0.2s;
+    }
+
+    .card2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .card:hover {
+      box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+    }
+
+    #heading {
+      text-align: center;
+      margin: 2em;
+      color: rgb(255, 255, 255);
+      font-size: 1.2em;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      border-radius: 25px;
+      padding: 0.6em;
+      border: none;
+      outline: none;
+      color: white;
+      background-color: #171717;
+      box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+      margin: 10px;
+    }
+
+    .input-icon {
+      height: 1.3em;
+      width: 1.3em;
+      fill: white;
+    }
+
+    .input-field {
+      background: none;
+      border: none;
+      outline: none;
+      width: 250px;
+      color: #d3d3d3;
+      height: 30px;
+    }
+
+    .form .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 2.5em;
+    }
+
+    .button1 {
+      padding: 0.5em;
+      padding-left: 1.1em;
+      padding-right: 1.1em;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button1:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button2 {
+      padding: 0.5em;
+      padding-left: 2.3em;
+      padding-right: 2.3em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button2:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button3 {
+      margin-bottom: 3em;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button3:hover {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body class="body">
+  <div class="form">
+    <h1 id="heading">Login</h1>
+    <form action="/login" method="POST" class="card2">
+      <div class="field card">
+        <svg class="input-icon" viewBox="0 0 24 24">
+          <path fill="none" d="M0 0h24v24H0V0z"/>
+          <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.89 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-2h2v2zm4.91-7.24c-.32-.27-.79-.26-1.09.04l-3.04 2.66-1.6-1.4c-.3-.26-.74-.24-1.02.04l-3.87 3.47c-.3.27-.31.74-.03 1.03.28.3.76.31 1.04.03l2.94-2.64 1.6 1.4c.3.26.76.24 1.04-.03l3.87-3.47c.3-.27.31-.74.03-1.03z"/>
+        </svg>
+        <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
+      </div>
+      <div class="field card">
+        <svg class="input-icon" viewBox="0 0 24 24">
+          <path fill="none" d="M0 0h24v24H0V0z"/>
+          <path d="M20 9H4c-1.1 0-1.99.9-1.99 2L2 19c0 1.1.89 2 1.99 2H20c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm-7 8c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+        </svg>
+        <input type="password" id="password" name="password" class="input-field" placeholder="Password" required>
+      </div>
+      <div class="btn">
+        <button type="submit" class="button1">Login</button>
+        <a href="/register" class="button2">Register</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+                                                                                      
+
+movies.js:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(40, 29, 65);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Estilos para el contenedor de búsqueda */
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Estilos para las tarjetas de películas */
+    .movie-carousel-container {
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .movie-carousel {
+      display: flex;
+      overflow: hidden;
+      /* Oculta la barra de deslizamiento */
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .movie {
+      margin-right: 10px;
+      /* Reducir el margen entre las películas */
+      flex: 0 0 calc(25% - 10px);
+      /* Ancho fijo para 4 tarjetas por fila */
+      position: relative;
+      max-width: 200px;
+      /* Ajustar el ancho máximo de la tarjeta de película */
+      cursor: pointer;
+      /* Cambiar el cursor al hacer hover */
+    }
+
+    .movie img {
+      width: 100%;
+      /* Ajusta el ancho al 100% del contenedor */
+      max-width: 200px;
+      /* Establece un máximo de ancho para evitar que las imágenes sean demasiado grandes */
+      height: auto;
+      /* Mantiene la proporción de aspecto */
+    }
+
+    .movie-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .movie:hover .movie-info {
+      opacity: 1;
+    }
+
+    .movie-info h3 {
+      margin-top: 0;
+    }
+
+    .movie-info p {
+      margin-bottom: 5px;
+    }
+
+    /* Estilos para los controles del carrusel */
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1;
+    }
+
+    .carousel-controls button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .carousel-controls button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+
+    .cabeza {
+      
+      height: 50px;
+      margin-bottom: 20px;
+      display: flex;
+    }
+
+    .cabeza {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+}
+
+.title a{
+    color: white;
+    margin: 0;
+    
+}
+
+.button2 {
+    text-decoration: none; /* Elimina la subrayado del link */
+    color: white; /* Hace el texto blanco */
+    text-decoration: none; 
+    
+}
+   
+
+    .title {
+      font-family: 'Impact', sans-serif;
+      /* Fuente impactante */
+      color: #8b0000;
+      /* Color sangre */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      /* Sombra al texto */
+      letter-spacing: 2px;
+      /* Espaciado entre letras */
+      padding-bottom: 20px;
+      /* Espaciado inferior */
+      animation: swing 2s infinite alternate;
+      /* Animación swing */
+    }
+
+    @keyframes swing {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(30px);
+        /* Cambia la distancia de la animación */
+      }
+    }
+
+
+    head {}
+
+  </style>
+  <div class="cabeza">
+    <h1 class="title">PATOFLIX</h1>
+    <a href="/dashboard" class="button2">Panel</a>
+    <a href="/" class="button2">Cerrar Sesión</a> 
+  </div>
+</head>
+
+<body>
+  <!-- Contenedor de búsqueda -->
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar películas...">
+    <button onclick="searchMovies()">Buscar</button>
+  </div>
+
+  <!-- Contenedor para mostrar películas -->
+  <div id="movies-container" style="display: flex;">
+    <!-- Aquí se insertarán las películas buscadas -->
+  </div>
+
+  <!-- Carruseles por género -->
+  <% Object.keys(moviesByGenre).forEach(genre=> { %>
+    <h2>
+      <%= genre %>
+    </h2>
+    <div class="movie-carousel-container">
+      <div class="carousel-controls">
+        <button class="carousel-prev" onclick="scrollCarousel('prev')">❮</button>
+        <button class="carousel-next" onclick="scrollCarousel('next')">❯</button>
+      </div>
+      <div class="movie-carousel">
+        <% moviesByGenre[genre].forEach(movie=> { %>
+          <div class="movie"
+            onclick="showMovieDetails('<%= movie.title %>', '<%= movie.overview %>', '<%= movie.genres.join(', ') %>')">
+            <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="<%= movie.title %>">
+            <div class="movie-info">
+              <h3>
+                <%= movie.title %>
+              </h3>
+              <p>
+                <%= movie.overview %>
+              </p>
+              <p>Género: <%= movie.genres.join(', ') %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  <% }); %>
+
+  <div id="movie-details">
+  </div>
+
+  <script>
+    async function searchMovies() {
+            const query = document.getElementById('search-input').value.trim();
+            if (query) {
+                try {
+                    const response = await fetch(`/search-movies?query=${query}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    displayMovies(data.results);
+                } catch (error) {
+                    console.error('Error fetching movies:', error);
+                }
+            } else {
+                console.error('Search query is empty');
+            }
+        }
+
+        function displayMovies(movies) {
+            const container = document.getElementById('movies-container');
+            container.innerHTML = ''; // Clear previous results
+            movies.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.className = 'movie';
+                movieDiv.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                    <h2>${movie.title}</h2>
+                    <p>${movie.overview}</p>
+                    <p>Género: ${movie.genre_ids.join(', ')}</p>
+                `;
+                container.appendChild(movieDiv);
+            });
+        }                               
+
+    function scrollCarousel(direction) {
+      const carousel = document.querySelector('.movie-carousel');
+      const scrollAmount = 300; // Ajusta la cantidad de desplazamiento
+
+      if (direction === 'prev') {
+        carousel.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      } else if (direction === 'next') {
+        carousel.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    function showMovieDetails(title, overview, genres) {
+      const detailsContainer = document.getElementById('movie-details');
+      detailsContainer.innerHTML = `
+                  <h2>${title}</h2>
+                  <p>${overview}</p>
+                  <p>Género: ${genres}</p>
+                  `;
+    }
+  </script>
+</body>                       
+
+register.js
+</html>                                                                                             
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* Estilos CSS proporcionados */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  gap: 10px;
+  padding: 0.4em 2em; /* Padding simplificado */
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 450px;
+  width: 300px;
+  transform: translate(-50%, -50%);
+}
+
+
+    .card {
+      background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+      border-radius: 22px;
+      transition: all 0.3s;
+    }
+
+    .card2 {
+      border-radius: 0;
+      transition: all 0.2s;
+    }
+
+    .card2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .card:hover {
+      box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+    }
+
+    #heading {
+      text-align: center;
+      margin: 2em;
+      color: rgb(255, 255, 255);
+      font-size: 1.2em;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      border-radius: 25px;
+      padding: 0.6em;
+      border: none;
+      outline: none;
+      color: white;
+      background-color: #171717;
+      box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+      margin: 10px;
+    }
+
+    .input-field {
+      background: none;
+      border: none;
+      outline: none;
+      width: 250px;
+      color: #d3d3d3;
+      height: 30px;
+
+    }
+
+    .form .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 2.5em;
+    }
+
+    .button1 {
+      padding: 0.5em;
+      padding-left: 1.1em;
+      padding-right: 1.1em;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button1:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button2 {
+      padding: 0.5em;
+      padding-left: 2.3em;
+      padding-right: 2.3em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button2:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button3 {
+      margin-bottom: 3em;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button3:hover {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h1 id="heading">Register</h1>
+    <form action="/register" method="POST" class="card2">
+      <div class="field card">
+        <input type="text" id="name" name="name" class="input-field" placeholder="Name" required>
+      </div>
+      <div class="field card">
+        <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
+      </div>
+      <div class="field card">
+        <input type="password" id="password" name="password" class="input-field" placeholder="Password" required>
+      </div>
+      <div class="field card">
+        <input type="password" id="confirm-password" name="confirmPassword" class="input-field" placeholder="Confirm Password" required>
+      </div>
+      <div class="btn">
+        <button type="submit" class="button1">Register</button>
+        <a href="/" class="button2">Login</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+
+movies.ejs:         
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* Estilos CSS proporcionados */   
+        
+    body{
+        background-color: rgb(40, 29, 65);
+        
+    }
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  gap: 10px;
+  padding: 0.4em 2em; /* Padding simplificado */
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 450px;
+  width: 300px;
+  transform: translate(-50%, -50%);
+}
+
+
+    .card {
+      background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+      border-radius: 22px;
+      transition: all 0.3s;
+    }
+
+    .card2 {
+      border-radius: 0;
+      transition: all 0.2s;
+    }
+
+    .card2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .card:hover {
+      box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+    }
+
+    #heading {
+      text-align: center;
+      margin: 2em;
+      color: rgb(255, 255, 255);
+      font-size: 1.2em;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      border-radius: 25px;
+      padding: 0.6em;
+      border: none;
+      outline: none;
+      color: white;
+      background-color: #171717;
+      box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+      margin: 10px;
+    }
+
+    .input-field {
+      background: none;
+      border: none;
+      outline: none;
+      width: 250px;
+      color: #d3d3d3;
+      height: 30px;
+
+    }
+
+    .form .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 2.5em;
+    }
+
+    .button1 {
+      padding: 0.5em;
+      padding-left: 1.1em;
+      padding-right: 1.1em;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button1:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button2 {
+      padding: 0.5em;
+      padding-left: 2.3em;
+      padding-right: 2.3em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button2:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button3 {
+      margin-bottom: 3em;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button3:hover {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h1 id="heading">Register</h1>
+    <form action="/register" method="POST" class="card2">
+      <div class="field card">
+        <input type="text" id="name" name="name" class="input-field" placeholder="Name" required>
+      </div>
+      <div class="field card">
+        <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
+      </div>
+      <div class="field card">
+        <input type="password" id="password" name="password" class="input-field" placeholder="Password" required>
+      </div>
+      <div class="field card">
+        <input type="password" id="confirm-password" name="confirmPassword" class="input-field" placeholder="Confirm Password" required>
+      </div>
+      <div class="btn">
+        <button type="submit" class="button1">Register</button>
+        <a href="/" class="button2">Login</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+                                                                              
+
+db.js:
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'login',
+  password: 'password',
+  port: 5432,
+});
+
+module.exports = pool;
+
+index.js:
+const express = require('express');
+const bodyParser = require('body-parser');
+const pool = require('./db');
+const axios = require('axios');
+
+const app = express();
+const port = 3000;
+
+const TMDB_API_KEY = '96854f6207833fe0daa0987536a19775';
+const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+
+let genres = [];
+
+// Función para obtener los géneros de películas desde TMDB
+const getGenres = async () => {
+  const response = await axios.get(`${TMDB_BASE_URL}/genre/movie/list`, {
+    params: {
+      api_key: TMDB_API_KEY,
+      language: 'es-ES'
+    }
+  });
+  return response.data.genres;
+};
+
+// Ruta principal - renderiza el login
+app.get('/', (req, res) => {
+  res.render('login');
+});
+
+// Ruta para el login
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const result = await pool.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password]);
+    if (result.rows.length > 0) {
+      res.redirect('/movies');
+    } else {
+      res.send('Invalid email or password');
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.send('An error occurred');
+  }
+});
+
+// Ruta para el registro de usuarios
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+
+app.post('/register', async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)', [name, email, password]);
+    res.redirect('/movies');
+  } catch (err) {
+    console.error(err.message);
+    res.send('An error occurred');
+  }
+});
+
+// Ruta para mostrar películas desde TMDB
+app.get('/movies', async (req, res) => {
+  try {
+    if (genres.length === 0) {
+      genres = await getGenres();
+    }
+
+    const response = await axios.get(`${TMDB_BASE_URL}/movie/popular`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: 'es-ES'
+      }
+    });
+
+    const movies = response.data.results.map(movie => {
+      return {
+        ...movie,
+        genres: movie.genre_ids.map(id => {
+          const genre = genres.find(genre => genre.id === id);
+          return genre ? genre.name : null;
+        }).filter(genre => genre !== null)
+      };
+    });
+
+    // Aquí agrupa las películas por género
+    const moviesByGenre = {};
+    movies.forEach(movie => {
+      movie.genres.forEach(genre => {
+        if (!moviesByGenre[genre]) {
+          moviesByGenre[genre] = [];
+        }
+        moviesByGenre[genre].push(movie);
+      });
+    });
+
+    res.render('movies', { moviesByGenre }); // Pasar moviesByGenre a la plantilla
+  } catch (err) {
+    console.error(err.message);
+    res.send('An error occurred while fetching movies');
+  }
+});
+
+// Ruta para buscar películas por título
+app.get('/search-movies', async (req, res) => {
+  const query = req.query.query; // Obtiene el parámetro de consulta 'query' desde la URL
+
+  try {
+    if (genres.length === 0) {
+      genres = await getGenres(); // Obtiene los géneros si no se han cargado previamente
+    }
+
+    // Realiza la solicitud a la API de TMDB para buscar películas por título
+    const response = await axios.get(`${TMDB_BASE_URL}/search/movie`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        query,
+        language: 'es-ES'
+      }
+    });
+
+    // Mapea los resultados para formatear los datos de las películas
+    const movies = response.data.results.map(movie => {
+      return {
+        ...movie,
+        genres: movie.genre_ids.map(id => {
+          const genre = genres.find(genre => genre.id === id);
+          return genre ? genre.name : null;
+        }).filter(genre => genre !== null)
+      };
+    });
+
+    res.json({ results: movies }); // Envía los resultados como JSON
+  } catch (err) {
+    console.error(err.message);
+    res.send('An error occurred while searching for movies');
+  }
+});
+
+// Rutas para el CRUD de usuarios en el dashboard
+app.get('/dashboard', async (req, res) => {
+  try {
+    const users = await pool.query('SELECT * FROM users');
+    res.render('dashboard', { users: users.rows });
+  } catch (err) {
+    console.error(err.message);
+    res.send('Error al cargar el dashboard');
+  }
+});
+
+app.post('/dashboard/add', async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3)', [name, email, password]);
+    res.redirect('/dashboard');
+  } catch (err) {
+    console.error(err.message);
+    res.send('Error al agregar usuario');
+  }
+});
+
+// Ruta para cargar el formulario de edición de usuario
+app.get('/dashboard/edit/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    res.render('edit', { user: user.rows[0] });
+  } catch (err) {
+    console.error(err.message);
+    res.send('Error al cargar usuario');
+  }
+});
+
+app.post('/dashboard/edit/:id', async (req, res) => {
+  const id = req.params.id;
+  const { name, email, password } = req.body;
+  try {
+    await pool.query('UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4', [name, email, password, id]);
+    res.redirect('/dashboard');
+  } catch (err) {
+    console.error(err.message);
+    res.send('Error al actualizar usuario');
+  }
+});
+
+app.get('/dashboard/delete/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await pool.query('DELETE FROM users WHERE id = $1', [id]);
+    res.redirect('/dashboard');
+  } catch (err) {
+    console.error(err.message);
+    res.send('Error al eliminar usuario');
+  }
+});
+
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
+});
+                                                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const axios = require('axios');
+
+const app = express();
+
+// Middleware para parsear body de formularios
+app.use(express.urlencoded({ extended: false }));
+
+// Ruta de inicio
+app.get('/', (req, res) => {
+    res.send('Bienvenido a la aplicación de gestión de películas.');
+});
+
+// Ruta para mostrar formulario para añadir una nueva película
+app.get('/new-movie', (req, res) => {
+    res.send(`
+        <form action="/add-movie" method="post">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title">
+            <button type="submit">Agregar Película</button>
+        </form>
+    `);
+});
+
+// Ruta para procesar el formulario y añadir una nueva película
+app.post('/add-movie', (req, res) => {
+    const { title } = req.body;
+
+    // Ejemplo de solicitud POST utilizando axios
+    axios.post('https://api.themoviedb.org/3/movie/add', {
+        title: title,
+        api_key: '96854f6207833fe0daa0987536a19775',  // Reemplaza 'your_api_key' con tu clave de API de TMDb
+    })
+    .then(response => {
+        console.log('Película añadida:', response.data);
+        res.send('Película añadida correctamente.');
+    })
+    .catch(error => {
+        console.error('Error al añadir película:', error);
+        res.send('Error al añadir película.');
+    });
+});
+
+// Puerto en el que escucha el servidor
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
+});

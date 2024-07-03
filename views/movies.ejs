@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(40, 29, 65);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    /* Estilos para el contenedor de búsqueda */
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Estilos para las tarjetas de películas */
+    .movie-carousel-container {
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .movie-carousel {
+      display: flex;
+      overflow: hidden;
+      /* Oculta la barra de deslizamiento */
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .movie {
+      margin-right: 10px;
+      /* Reducir el margen entre las películas */
+      flex: 0 0 calc(25% - 10px);
+      /* Ancho fijo para 4 tarjetas por fila */
+      position: relative;
+      max-width: 200px;
+      /* Ajustar el ancho máximo de la tarjeta de película */
+      cursor: pointer;
+      /* Cambiar el cursor al hacer hover */
+    }
+
+    .movie img {
+      width: 100%;
+      /* Ajusta el ancho al 100% del contenedor */
+      max-width: 200px;
+      /* Establece un máximo de ancho para evitar que las imágenes sean demasiado grandes */
+      height: auto;
+      /* Mantiene la proporción de aspecto */
+    }
+
+    .movie-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+
+    .movie:hover .movie-info {
+      opacity: 1;
+    }
+
+    .movie-info h3 {
+      margin-top: 0;
+    }
+
+    .movie-info p {
+      margin-bottom: 5px;
+    }
+
+    /* Estilos para los controles del carrusel */
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1;
+    }
+
+    .carousel-controls button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .carousel-controls button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+
+    .cabeza {
+      
+      height: 50px;
+      margin-bottom: 20px;
+      display: flex;
+    }
+
+    .cabeza {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+}
+
+.title a{
+    color: white;
+    margin: 0;
+    
+}
+
+.button2 {
+    text-decoration: none; /* Elimina la subrayado del link */
+    color: white; /* Hace el texto blanco */
+    text-decoration: none; 
+    
+}
+   
+
+    .title {
+      font-family: 'Impact', sans-serif;
+      /* Fuente impactante */
+      color: #8b0000;
+      /* Color sangre */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      /* Sombra al texto */
+      letter-spacing: 2px;
+      /* Espaciado entre letras */
+      padding-bottom: 20px;
+      /* Espaciado inferior */
+      animation: swing 2s infinite alternate;
+      /* Animación swing */
+    }
+
+    @keyframes swing {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(30px);
+        /* Cambia la distancia de la animación */
+      }
+    }
+
+
+    head {}
+
+  </style>
+  <div class="cabeza">
+    <h1 class="title">PATOFLIX</h1>
+    <a href="/dashboard" class="button2">Panel</a>
+    <a href="/" class="button2">Cerrar Sesión</a> 
+  </div>
+</head>
+
+<body>
+  <!-- Contenedor de búsqueda -->
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar películas...">
+    <button onclick="searchMovies()">Buscar</button>
+  </div>
+
+  <!-- Contenedor para mostrar películas -->
+  <div id="movies-container" style="display: flex;">
+    <!-- Aquí se insertarán las películas buscadas -->
+  </div>
+
+  <!-- Carruseles por género -->
+  <% Object.keys(moviesByGenre).forEach(genre=> { %>
+    <h2>
+      <%= genre %>
+    </h2>
+    <div class="movie-carousel-container">
+      <div class="carousel-controls">
+        <button class="carousel-prev" onclick="scrollCarousel('prev')">❮</button>
+        <button class="carousel-next" onclick="scrollCarousel('next')">❯</button>
+      </div>
+      <div class="movie-carousel">
+        <% moviesByGenre[genre].forEach(movie=> { %>
+          <div class="movie"
+            onclick="showMovieDetails('<%= movie.title %>', '<%= movie.overview %>', '<%= movie.genres.join(', ') %>')">
+            <img src="https://image.tmdb.org/t/p/w500<%= movie.poster_path %>" alt="<%= movie.title %>">
+            <div class="movie-info">
+              <h3>
+                <%= movie.title %>
+              </h3>
+              <p>
+                <%= movie.overview %>
+              </p>
+              <p>Género: <%= movie.genres.join(', ') %></p>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  <% }); %>
+
+  <div id="movie-details">
+  </div>
+
+  <script>
+    async function searchMovies() {
+            const query = document.getElementById('search-input').value.trim();
+            if (query) {
+                try {
+                    const response = await fetch(`/search-movies?query=${query}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    displayMovies(data.results);
+                } catch (error) {
+                    console.error('Error fetching movies:', error);
+                }
+            } else {
+                console.error('Search query is empty');
+            }
+        }
+
+        function displayMovies(movies) {
+            const container = document.getElementById('movies-container');
+            container.innerHTML = ''; // Clear previous results
+            movies.forEach(movie => {
+                const movieDiv = document.createElement('div');
+                movieDiv.className = 'movie';
+                movieDiv.innerHTML = `
+                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+                    <h2>${movie.title}</h2>
+                    <p>${movie.overview}</p>
+                    <p>Género: ${movie.genre_ids.join(', ')}</p>
+                `;
+                container.appendChild(movieDiv);
+            });                 
+        }                               
+
+    function scrollCarousel(direction) {
+      const carousel = document.querySelector('.movie-carousel');
+      const scrollAmount = 300; 
+
+      if (direction === 'prev') {
+        carousel.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      } else if (direction === 'next') {
+        carousel.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    function showMovieDetails(title, overview, genres) {
+      const detailsContainer = document.getElementById('movie-details');
+      detailsContainer.innerHTML = `
+                  <h2>${title}</h2>
+                  <p>${overview}</p>
+                  <p>Género: ${genres}</p>
+                  `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof movie !== 'undefined' ? 'Editar Película' : 'Agregar Película' %></title>
+</head>
+<body>
+  <h1><%= typeof movie !== 'undefined' ? 'Editar Película' : 'Agregar Película' %></h1>
+  <form action="<%= typeof movie !== 'undefined' ? '/movies/' + movie.id + '?_method=PUT' : '/movies' %>" method="POST">
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title" value="<%= typeof movie !== 'undefined' ? movie.title : '' %>">
+
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" value="<%= typeof movie !== 'undefined' ? movie.director : '' %>">
+
+    <label for="year">Año:</label>
+    <input type="number" id="year" name="year" value="<%= typeof movie !== 'undefined' ? movie.year : '' %>">
+
+    <button type="submit"><%= typeof movie !== 'undefined' ? 'Guardar Cambios' : 'Agregar Película' %></button>
+  </form>
+</body>
+</html>
+                                                              -->

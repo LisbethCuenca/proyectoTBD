@@ -1,0 +1,244 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+  
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(40, 29, 65);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #444;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #555;
+    }
+
+    tr:hover {
+      background-color: #777;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: rgb(40, 29, 65);
+      border-radius: 5px;
+    }
+
+    .form-container input[type="text"], 
+    .form-container input[type="email"], 
+    .form-container input[type="password"] {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+      width: 200px;
+    }
+
+    .form-container input[type="submit"] {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Agregar Usuario</h2>
+    <form action="/dashboard/add" method="POST">
+      <input type="text" name="name" placeholder="Nombre" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <input type="submit" value="Agregar">
+    </form>
+  </div>
+
+  <h2>Lista de Usuarios</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <a href="/dashboard/edit/<%= user.id %>" style="color:white" >Editar</a>
+            <a href="/dashboard/delete/<%= user.id %>" style="color:white" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    /* Estilos CSS para el dashboard */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(40, 29, 65);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #444;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #555;
+    }
+
+    tr:hover {
+      background-color: #777;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: rgb(40, 29, 65);
+      border-radius: 5px;
+    }
+
+    .form-container input[type="text"], 
+    .form-container input[type="email"], 
+    .form-container input[type="password"] {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+      width: 200px;
+    }
+
+    .form-container input[type="submit"] {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .form-container input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .report-links a {
+      color: white;
+      background-color: #007bff;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .report-links a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Agregar Usuario</h2>
+    <form action="/dashboard/add" method="POST">
+      <input type="text" name="name" placeholder="Nombre" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <input type="submit" value="Agregar">
+    </form>
+  </div>
+
+  <h2>Lista de Usuarios</h2>
+  <div class="report-links">
+    <a href="/report/pdf">Descargar Reporte en PDF</a>
+    <a href="/report/excel">Descargar Reporte en Excel</a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <a href="/dashboard/edit/<%= user.id %>" style="color:white">Editar</a>
+            <a href="/dashboard/delete/<%= user.id %>" style="color:white" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+          </td>
+        </tr>
+      <% }); %>                          
+    </tbody>                           
+  </table>
+</body>
+</html>
+                                                                              

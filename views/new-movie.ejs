@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N</title>
+</head>
+<body>
+  <h1>New Movie</h1>
+  <form action="/save-movie" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br><br>
+    
+    <label for="overview">Overview:</label><br>
+    <textarea id="overview" name="overview" rows="4" cols="50" required></textarea><br><br>
+    
+    <label for="release_date">Release Date:</label>
+    <input type="date" id="release_date" name="release_date" required><br><br>
+    
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" required><br><br>
+    
+    <label for="poster_path">Poster Path:</label>
+    <input type="text" id="poster_path" name="poster_path" required><br><br>
+    
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>

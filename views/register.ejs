@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* Estilos CSS proporcionados */   
+        
+    body{
+        background-color: rgb(40, 29, 65);
+        
+    }
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  gap: 10px;
+  padding: 0.4em 2em; /* Padding simplificado */
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 450px;
+  width: 300px;
+  transform: translate(-50%, -50%);
+}
+
+
+    .card {
+      background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+      border-radius: 22px;
+      transition: all 0.3s;
+    }
+
+    .card2 {
+      border-radius: 0;
+      transition: all 0.2s;
+    }
+
+    .card2:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+    }
+
+    .card:hover {
+      box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
+    }
+
+    #heading {
+      text-align: center;
+      margin: 2em;
+      color: rgb(255, 255, 255);
+      font-size: 1.2em;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      border-radius: 25px;
+      padding: 0.6em;
+      border: none;
+      outline: none;
+      color: white;
+      background-color: #171717;
+      box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+      margin: 10px;
+    }
+
+    .input-field {
+      background: none;
+      border: none;
+      outline: none;
+      width: 250px;
+      color: #d3d3d3;
+      height: 30px;
+
+    }
+
+    .form .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 2.5em;
+    }
+
+    .button1 {
+      padding: 0.5em;
+      padding-left: 1.1em;
+      padding-right: 1.1em;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button1:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button2 {
+      padding: 0.5em;
+      padding-left: 2.3em;
+      padding-right: 2.3em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button2:hover {
+      background-color: black;
+      color: white;
+    }
+
+    .button3 {
+      margin-bottom: 3em;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      transition: 0.4s ease-in-out;
+      background-color: #252525;
+      color: white;
+    }
+
+    .button3:hover {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h1 id="heading">Register</h1>
+    <form action="/register" method="POST" class="card2">
+      <div class="field card">
+        <input type="text" id="name" name="name" class="input-field" placeholder="Name" required>
+      </div>
+      <div class="field card">
+        <input type="email" id="email" name="email" class="input-field" placeholder="Email" required>
+      </div>
+      <div class="field card">
+        <input type="password" id="password" name="password" class="input-field" placeholder="Password" required>
+      </div>
+      <div class="field card">
+        <input type="password" id="confirm-password" name="confirmPassword" class="input-field" placeholder="Confirm Password" required>
+      </div>
+      <div class="btn">
+        <button type="submit" class="button1">Register</button>
+        <a href="/" class="button2">Login</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
